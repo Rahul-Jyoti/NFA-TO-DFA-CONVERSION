@@ -19,11 +19,14 @@ print(nfa)                                    #Printing NFA
 print("\nPrinting NFA table :- ")
 nfa_table = pd.DataFrame(nfa)
 print(nfa_table.transpose())
+
+print("Enter final state of NFA : ")
+nfa_final_state = [x for x in input().split()]      # Enter final state/states of NFA
 ###################################################                 
     
 new_states_list = []                          #holds all the new states created in dfa
 dfa = {}                                      #dfa dictionary/table or the output structure we needed
-keys_list = list(nfa.keys())                  #conatins all the states in nfa plus the states created in dfa are also appended further
+keys_list = list(list(nfa.keys())[0])                  #conatins all the states in nfa plus the states created in dfa are also appended further
 path_list = list(nfa[keys_list[0]].keys())    #list of all the paths eg: [a,b] or [0,1]
 
 ###################################################
@@ -63,6 +66,16 @@ print(dfa)                                           #Printing the DFA created
 print("\nPrinting DFA table :- ")
 dfa_table = pd.DataFrame(dfa)
 print(dfa_table.transpose())
+
+dfa_states_list = list(dfa.keys())
+dfa_final_states = []
+for x in dfa_states_list:
+    for i in x:
+        if i in nfa_final_state:
+            dfa_final_states.append(x)
+            break
+        
+print("\nFinal states of the DFA are : ",dfa_final_states)       #Printing Final states of DFA
 
  
 
@@ -110,6 +123,8 @@ A  [A, B]  [A]
 B     [C]  [C]
 C     [D]  [D]
 D      []   []
+Enter final state of NFA : 
+D
 
 DFA :- 
 
@@ -125,5 +140,7 @@ ABCD  ABCD  ACD
 ACD    ABD   AD
 ABD    ABC   AC
 AD      AB    A
+
+Final states of the DFA are :  ['ABCD', 'ACD', 'ABD', 'AD']
 
 """
