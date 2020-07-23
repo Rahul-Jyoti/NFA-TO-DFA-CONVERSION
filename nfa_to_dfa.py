@@ -143,4 +143,6 @@ AD      AB    A
 
 Final states of the DFA are :  ['ABCD', 'ACD', 'ABD', 'AD']
 
+
 """
+#code to convert nfa to dfa 
